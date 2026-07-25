@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>英特尔® 酷睿™ i3-8100 处理器 规格</title>
+    <style>
+        /* ----- 全局重置 & 基础 ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", "PingFang SC", Roboto, "Helvetica Neue", sans-serif;
+            background: #f5f7fa;
+            color: #1a1a2e;
+            padding: 2rem 1.5rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ----- 头部区域 ----- */
+        .header {
+            background: linear-gradient(145deg, #003b6f, #0068b4);
+            color: #fff;
+            border-radius: 20px;
+            padding: 2.2rem 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 12px 40px rgba(0, 80, 160, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: "⏺";
+            position: absolute;
+            right: 0;
+            top: -40px;
+            font-size: 16rem;
+            opacity: 0.06;
+            pointer-events: none;
+            font-weight: 300;
+            transform: rotate(12deg);
+        }
+
+        .header-badge {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .header-badge .upe {
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 1.5px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.25rem 1.2rem;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+        }
+
+        .header-badge .timestamp {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-top: 0.25rem;
+            line-height: 1.2;
+        }
+
+        .header h1 small {
+            font-weight: 300;
+            font-size: 1.2rem;
+            opacity: 0.85;
+            display: block;
+            margin-top: 0.2rem;
+            letter-spacing: 0.3px;
+        }
+
+        .header-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem 3rem;
+            margin-top: 1.2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 0.95rem;
+        }
+
+        .header-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-meta .label {
+            opacity: 0.7;
+            font-weight: 300;
+        }
+
+        .header-meta .value {
+            font-weight: 500;
+        }
+
+        /* ----- 卡片通用 ----- */
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.03);
+            padding: 1.8rem 2rem;
+            margin-bottom: 1.8rem;
+            transition: box-shadow 0.2s ease;
+            border: 1px solid rgba(0, 60, 120, 0.04);
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 32px rgba(0, 60, 120, 0.07);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #003b6f;
+            margin-bottom: 1.4rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #e8edf5;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            letter-spacing: 0.2px;
+        }
+
+        .card-title .icon {
+            font-size: 1.3rem;
+            opacity: 0.7;
+        }
+
+        /* ----- 规格网格 ----- */
+        .spec-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem 2.5rem;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.45rem 0;
+            border-bottom: 1px solid #f0f3f9;
+            font-size: 0.95rem;
+            gap: 1rem;
+        }
+
+        .spec-item .name {
+            color: #4a5568;
+            font-weight: 450;
+            flex-shrink: 0;
+            min-width: 120px;
+        }
+
+        .spec-item .value {
+            color: #1a1a2e;
+            font-weight: 500;
+            text-align: right;
+            word-break: break-word;
+        }
+
+        .spec-item .value .tag {
+            display: inline-block;
+            background: #eef3fc;
+            color: #003b6f;
+            padding: 0.08rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .spec-item .value .tag-yes {
+            background: #e3f2e9;
+            color: #0a6b3f;
+        }
+
+        .spec-item .value .tag-no {
+            background: #fce8e8;
+            color: #9e2a2a;
+        }
+
+        .spec-item .value .badge-link {
+            display: inline-block;
+            background: #0068b4;
+            color: #fff;
+            padding: 0.08rem 1rem;
+            border-radius: 30px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        /* 特殊：多行值（管道分隔） */
+        .spec-item .value .pipe-sep {
+            display: inline-block;
+            margin: 0 0.2rem;
+            color: #b0c4de;
+        }
+
+        /* ----- 全宽项（占两列） ----- */
+        .spec-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* ----- 响应式 ----- */
+        @media (max-width: 820px) {
+            .header {
+                padding: 1.6rem 1.5rem;
+            }
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .header h1 small {
+                font-size: 1rem;
+            }
+            .header-meta {
+                gap: 0.8rem 1.5rem;
+                font-size: 0.85rem;
+            }
+            .card {
+                padding: 1.4rem 1.2rem;
+            }
+            .spec-grid {
+                grid-template-columns: 1fr;
+                gap: 0.2rem;
+            }
+            .spec-item {
+                flex-wrap: wrap;
+                padding: 0.5rem 0;
+            }
+            .spec-item .name {
+                min-width: 100px;
+                font-size: 0.9rem;
+            }
+            .spec-item .value {
+                text-align: left;
+                font-size: 0.92rem;
+            }
+            .spec-item.full-width {
+                grid-column: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.8rem;
+            }
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            .header-badge .upe {
+                font-size: 0.85rem;
+                padding: 0.15rem 0.9rem;
+            }
+            .header-badge .timestamp {
+                font-size: 0.7rem;
+            }
+            .card-title {
+                font-size: 1rem;
+            }
+            .spec-item .name {
+                min-width: 80px;
+                font-size: 0.82rem;
+            }
+            .spec-item .value {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ----- 页脚 ----- */
+        .footer {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding: 1.5rem 0 0.5rem;
+            color: #8899b0;
+            font-size: 0.8rem;
+            border-top: 1px solid #e2e8f0;
+            letter-spacing: 0.3px;
+        }
+        .footer a {
+            color: #0068b4;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* 特殊样式：ECC 等带 ‡ 符号保持原样 */
+        .spec-item .name .dagger {
+            color: #8899b0;
+            font-size: 0.75rem;
+            vertical-align: super;
+            margin-left: 0.1rem;
+        }
+
+        /* 小标签内联 */
+        .inline-tag {
+            display: inline-block;
+            background: #eef3fc;
+            padding: 0.05rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #003b6f;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ====== 头部 ====== -->
+        <header class="header">
+            <div class="header-badge">
+                <span class="upe">⚡ UPE</span>
+                <span class="timestamp">📅 2026-07-25 15:47:34</span>
+            </div>
+            <h1>
+                英特尔® 酷睿™ i3-8100 处理器
+                <small>6M 高速缓存，3.60 GHz</small>
+            </h1>
+            <div class="header-meta">
+                <span><span class="label">产品集</span><span class="value">第八代智能英特尔® 酷睿™ i3 处理器</span></span>
+                <span><span class="label">处理器编号</span><span class="value">i3-8100</span></span>
+                <span><span class="label">光刻</span><span class="value">14 nm</span></span>
+                <span><span class="label">建议客户价格</span><span class="value">$117</span></span>
+            </div>
+        </header>
+
+        <!-- ====== 基本要素 ====== -->
+        <section class="card">
+            <div class="card-title"><span class="icon">📋</span> 基本要素</div>
+            <div class="spec-grid">
+                <div class="spec-item"><span class="name">产品集</span><span class="value">第八代智能英特尔® 酷睿™ i3 处理器</span></div>
+                <div class="spec-item"><span class="name">代号名称</span><span class="value">先前产品为 Coffee Lake</span></div>
+                <div class="spec-item"><span class="name">垂直市场</span><span class="value">Desktop</span></div>
+                <div class="spec-item"><span class="name">处理器编号</span><span class="value">i3-8100</span></div>
+                <div class="spec-item"><span class="name">光刻</span><span class="value">14 nm</span></div>
+                <div class="spec-item"><span class="name">建议客户价格</span><span class="value">$117</span></div>
+            </div>
+        </section>
+
+        <!-- ====== CPU 规格 ====== -->
+        <section class="card">
+            <div class="card-title"><span class="icon">⚙️</span> CPU 规格</div>
+            <div class="spec-grid">
+                <div class="spec-item"><span class="name">内核数</span><span class="value">4</span></div>
+                <div class="spec-item"><span class="name">总线程数</span><span class="value">4</span></div>
+                <div class="spec-item"><span class="name">处理器基本频率</span><span class="value">3.60 GHz</span></div>
+                <div class="spec-item"><span class="name">缓存</span><span class="value">6 MB Intel® Smart Cache</span></div>
+                <div class="spec-item"><span class="name">总线速度</span><span class="value">8 GT/s</span></div>
+                <div class="spec-item"><span class="name">TDP</span><span class="value">65 W</span></div>
+            </div>
+        </section>
+
+        <!-- ====== 补充信息 ====== -->
+        <section class="card">
+            <div class="card-title"><span class="icon">📌</span> 补充信息</div>
+            <div class="spec-grid">
+                <div class="spec-item"><span class="name">状态</span><span class="value"><span class="tag tag-no">Discontinued</span></span></div>
+                <div class="spec-item"><span class="name">发行日期</span><span class="value">Q4'17</span></div>
+                <div class="spec-item"><span class="name">服务状态</span><span class="value">ESU Notification Issued</span></div>
+                <div class="spec-item"><span class="name">服务更新终止日期</span><span class="value">Monday, June 30, 2025</span></div>
+                <div class="spec-item"><span class="name">可用的嵌入式选项</span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item full-width"><span class="name">使用条件</span><span class="value">Embedded Broad Market Commercial Temp <span class="pipe-sep">|</span> PC/Client/Tablet</span></div>
+                <div class="spec-item"><span class="name">数据表</span><span class="value"><span class="badge-link">📄 立即查看</span></span></div>
+            </div>
+        </section>
+
+        <!-- ====== 内存规格 ====== -->
+        <section class="card">
+            <div class="card-title"><span class="icon">🧠</span> 内存规格</div>
+            <div class="spec-grid">
+                <div class="spec-item"><span class="name">最大内存大小 <span class="dagger">‡</span></span><span class="value">64 GB</span></div>
+                <div class="spec-item"><span class="name">内存类型</span><span class="value">DDR4-2400</span></div>
+                <div class="spec-item"><span class="name">最大内存通道数</span><span class="value">2</span></div>
+                <div class="spec-item"><span class="name">最大内存带宽</span><span class="value">37.5 GB/s</span></div>
+                <div class="spec-item"><span class="name">支持的 ECC 内存 <span class="dagger">‡</span></span><span class="value"><span class="tag tag-yes">是</span></span></div>
+            </div>
+        </section>
+
+        <!-- ====== GPU Specifications ====== -->
+        <section class="card">
+            <div class="card-title"><span class="icon">🎮</span> GPU Specifications</div>
+            <div class="spec-grid">
+                <div class="spec-item"><span class="name">GPU Name <span class="dagger">‡</span></span><span class="value">Intel® UHD Graphics 630</span></div>
+                <div class="spec-item"><span class="name">显卡基本频率</span><span class="value">350 MHz</span></div>
+                <div class="spec-item"><span class="name">显卡最大动态频率</span><span class="value">1.10 GHz</span></div>
+                <div class="spec-item"><span class="name">显卡视频最大内存</span><span class="value">64 GB</span></div>
+                <div class="spec-item"><span class="name">4K 支持</span><span class="value">Yes at 60Hz</span></div>
+                <div class="spec-item"><span class="name">最大分辨率 (HDMI) <span class="dagger">‡</span></span><span class="value">4096×2304@24Hz</span></div>
+                <div class="spec-item"><span class="name">最大分辨率 (DP) <span class="dagger">‡</span></span><span class="value">4096×2304@60Hz</span></div>
+                <div class="spec-item"><span class="name">最大分辨率（eDP - 集成平板）<span class="dagger">‡</span></span><span class="value">4096×2304@60Hz</span></div>
+                <div class="spec-item"><span class="name">DirectX* 支持</span><span class="value">12</span></div>
+                <div class="spec-item"><span class="name">OpenGL* 支持</span><span class="value">4.5</span></div>
+                <div class="spec-item"><span class="name">英特尔® Quick Sync Video</span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">英特尔 InTru 3D 技术</span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">英特尔® 清晰视频核芯技术</span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">英特尔® 清晰视频技术</span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">支持的显示器数量 <span class="dagger">‡</span></span><span class="value">3</span></div>
+                <div class="spec-item"><span class="name">设备 ID</span><span class="value">0x3E91/x92</span></div>
+            </div>
+        </section>
+
+        <!-- ====== 扩展选项 ====== -->
+        <section class="card">
+            <div class="card-title"><span class="icon">🔌</span> 扩展选项</div>
+            <div class="spec-grid">
+                <div class="spec-item"><span class="name">可扩展性</span><span class="value">1S Only</span></div>
+                <div class="spec-item"><span class="name">PCI Express 修订版</span><span class="value">3</span></div>
+                <div class="spec-item full-width"><span class="name">PCI Express 配置 <span class="dagger">‡</span></span><span class="value">Up to 1x16 <span class="pipe-sep">|</span> 2x8 <span class="pipe-sep">|</span> 1x8+2x4</span></div>
+                <div class="spec-item"><span class="name">PCI Express 通道数的最大值</span><span class="value">16</span></div>
+            </div>
+        </section>
+
+        <!-- ====== 封装规格 ====== -->
+        <section class="card">
+            <div class="card-title"><span class="icon">📦</span> 封装规格</div>
+            <div class="spec-grid">
+                <div class="spec-item"><span class="name">支持的插槽</span><span class="value">FCLGA1151</span></div>
+                <div class="spec-item"><span class="name">最大 CPU 配置</span><span class="value">1</span></div>
+                <div class="spec-item"><span class="name">散热解决方案规范</span><span class="value">PCG 2015C (65W)</span></div>
+                <div class="spec-item"><span class="name">TJUNCTION</span><span class="value">100°C</span></div>
+                <div class="spec-item"><span class="name">封装大小</span><span class="value">37.5mm × 37.5mm</span></div>
+            </div>
+        </section>
+
+        <!-- ====== 先进技术 ====== -->
+        <section class="card">
+            <div class="card-title"><span class="icon">🚀</span> 先进技术</div>
+            <div class="spec-grid">
+                <div class="spec-item"><span class="name">支持英特尔® 傲腾™ 内存 <span class="dagger">‡</span></span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">英特尔® 睿频加速技术 <span class="dagger">‡</span></span><span class="value"><span class="tag tag-no">否</span></span></div>
+                <div class="spec-item"><span class="name">英特尔® 超线程技术 <span class="dagger">‡</span></span><span class="value"><span class="tag tag-no">否</span></span></div>
+                <div class="spec-item"><span class="name">英特尔® TSX-NI</span><span class="value"><span class="tag tag-no">否</span></span></div>
+                <div class="spec-item"><span class="name">英特尔® 64 <span class="dagger">‡</span></span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">指令集</span><span class="value">64-bit</span></div>
+                <div class="spec-item full-width"><span class="name">指令集扩展</span><span class="value">Intel® SSE4.1 <span class="pipe-sep">|</span> Intel® SSE4.2 <span class="pipe-sep">|</span> Intel® AVX2</span></div>
+                <div class="spec-item"><span class="name">空闲状态</span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">Enhanced Intel SpeedStep® Technology</span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">温度监视技术</span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">英特尔® 身份保护技术 <span class="dagger">‡</span></span><span class="value"><span class="tag tag-yes">是</span></span></div>
+            </div>
+        </section>
+
+        <!-- ====== 安全性与可靠性 ====== -->
+        <section class="card">
+            <div class="card-title"><span class="icon">🛡️</span> 安全性与可靠性</div>
+            <div class="spec-grid">
+                <div class="spec-item"><span class="name">英特尔® 睿码技术</span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">英特尔® AES 新指令</span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">英特尔® Software Guard Extensions</span><span class="value">Yes with Intel® ME</span></div>
+                <div class="spec-item"><span class="name">英特尔® 内存保护扩展</span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">英特尔® 操作系统守护</span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">英特尔® Trusted Execution Technology <span class="dagger">‡</span></span><span class="value"><span class="tag tag-no">否</span></span></div>
+                <div class="spec-item"><span class="name">执行禁用位 <span class="dagger">‡</span></span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">英特尔® Boot Guard</span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">英特尔® 稳定映像平台计划</span><span class="value"><span class="tag tag-no">否</span></span></div>
+                <div class="spec-item"><span class="name">英特尔® 虚拟化技术 (VT-x) <span class="dagger">‡</span></span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">英特尔® VT-d <span class="dagger">‡</span></span><span class="value"><span class="tag tag-yes">是</span></span></div>
+                <div class="spec-item"><span class="name">英特尔® VT-x with EPT <span class="dagger">‡</span></span><span class="value"><span class="tag tag-yes">是</span></span></div>
+            </div>
+        </section>
+
+        <!-- ====== 页脚 ====== -->
+        <div class="footer">
+            <p>数据基于 Intel® 产品规格表 &nbsp;·&nbsp; 更新时间 2026-07-25 &nbsp;·&nbsp; <span class="inline-tag">i3-8100</span></p>
+            <p style="margin-top:0.3rem; font-size:0.75rem; opacity:0.6;">英特尔、酷睿、傲腾及其他英特尔标识是英特尔公司或其子公司的商标。</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
