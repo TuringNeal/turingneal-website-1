@@ -1,0 +1,368 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于本站</title>
+    <style>
+        /* ===== CSS 变量 – 亮色主题 ===== */
+        :root {
+            --bg: #f7f8fa;
+            --card-bg: #ffffff;
+            --card-border: #eaeef2;
+            --text-primary: #1d2a3a;
+            --text-secondary: #3e4e5e;
+            --text-muted: #8e9eae;
+            --badge-bg: #eef2f6;
+            --badge-color: #4a5a6a;
+            --btn-border: #d0d8e0;
+            --btn-color: #3e4e5e;
+            --btn-hover-bg: #f0f3f6;
+            --link-color: #5a6a7a;
+            --item-border: #eef2f6;
+            --label-color: #5a6a7a;
+            --value-color: #1d2a3a;
+        }
+
+        /* ===== 暗色主题 ===== */
+        [data-theme="dark"] {
+            --bg: #1a1e26;
+            --card-bg: #242a34;
+            --card-border: #313842;
+            --text-primary: #e6edf5;
+            --text-secondary: #b0c0d0;
+            --text-muted: #7a8a9a;
+            --badge-bg: #2d3540;
+            --badge-color: #b0c0d0;
+            --btn-border: #4a5a6a;
+            --btn-color: #b0c0d0;
+            --btn-hover-bg: #2d3540;
+            --link-color: #8a9aaa;
+            --item-border: #2d3540;
+            --label-color: #9aabbb;
+            --value-color: #e6edf5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            padding: 24px;
+            transition: background 0.25s ease;
+        }
+
+        .card {
+            max-width: 820px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px 36px 36px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--card-border);
+            transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        /* ===== 头部 ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .title {
+            font-size: 26px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.2px;
+            transition: color 0.25s ease;
+        }
+
+        .title small {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-left: 10px;
+        }
+
+        .theme-toggle button {
+            background: transparent;
+            border: 1px solid var(--btn-border);
+            border-radius: 100px;
+            padding: 5px 18px;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--btn-color);
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+            font-family: inherit;
+            letter-spacing: 0.3px;
+            user-select: none;
+        }
+
+        .theme-toggle button:hover {
+            background: var(--btn-hover-bg);
+            border-color: var(--text-muted);
+        }
+
+        .theme-toggle button:focus-visible {
+            outline: 2px solid var(--text-secondary);
+            outline-offset: 2px;
+        }
+
+        /* ===== 内容 ===== */
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .paragraph {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            transition: color 0.25s ease;
+        }
+
+        .paragraph strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 32px;
+            margin-top: 4px;
+        }
+
+        .info-item {
+            display: flex;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--item-border);
+            transition: border-color 0.25s ease;
+        }
+
+        .info-item .label {
+            flex: 0 0 110px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--label-color);
+            transition: color 0.25s ease;
+        }
+
+        .info-item .value {
+            flex: 1;
+            font-size: 14px;
+            color: var(--value-color);
+            transition: color 0.25s ease;
+            word-break: break-word;
+        }
+
+        .info-item .value a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .info-item .value a:hover {
+            border-bottom-color: var(--link-color);
+            color: var(--text-primary);
+        }
+
+        .info-item.full {
+            grid-column: 1 / -1;
+        }
+
+        .repo-links {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 14px;
+        }
+
+        .repo-links a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s ease, color 0.2s ease;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .repo-links a:hover {
+            border-bottom-color: var(--link-color);
+            color: var(--text-primary);
+        }
+
+        /* ===== 底部 ===== */
+        .footer-note {
+            margin-top: 32px;
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+            border-top: 1px solid var(--card-border);
+            padding-top: 20px;
+            transition: color 0.25s ease, border-color 0.25s ease;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 700px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            .info-item {
+                padding: 8px 0;
+            }
+            .info-item .label {
+                flex-basis: 90px;
+                font-size: 13px;
+            }
+            .card {
+                padding: 28px 18px 24px;
+            }
+            .title {
+                font-size: 22px;
+            }
+            .paragraph {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .info-item .label {
+                flex-basis: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+
+        <!-- 头部 -->
+        <div class="header">
+            <div class="title">
+                📄 关于本站
+                <small>建站手记</small>
+            </div>
+            <div class="theme-toggle">
+                <button id="theme-switch" aria-label="切换亮色/暗色模式">亮色</button>
+            </div>
+        </div>
+
+        <!-- 正文 -->
+        <div class="content">
+            <p class="paragraph">
+                这个网站是我中考后突然心血来潮弄出来的。<br>
+                关于这个网站，我总共注册了两个域名：
+                <strong>https://turingneal.dpdns.org</strong>（主域名，先前的“网站施工中...”页面）和
+                <strong>https://3752113809.dpdns.org</strong>（备用域名，就是你现在看到的这个页面）。
+            </p>
+            <p class="paragraph">
+                不过我目前还没想好要往这个网站里面放什么东西（也许是个人博客，技术分享，或者其他）。总之，这个网站的页面在之后一段时间里不会有太大的变化，我想你也不会来这个网站看第二次。
+            </p>
+
+            <!-- 服务提供商列表 -->
+            <div class="info-grid">
+                <div class="info-item full">
+                    <span class="label">域名提供</span>
+                    <span class="value">DigitalPlat Domains</span>
+                </div>
+                <div class="info-item full">
+                    <span class="label">网站托管及保护</span>
+                    <span class="value">Cloudflare</span>
+                </div>
+                <div class="info-item full">
+                    <span class="label">网页和文件存放</span>
+                    <span class="value">GitHub</span>
+                </div>
+                <div class="info-item full">
+                    <span class="label">网页编写</span>
+                    <span class="value">我自己</span>
+                </div>
+            </div>
+
+            <!-- GitHub 仓库 -->
+            <div class="paragraph" style="margin-top: 4px;">
+                <strong>GitHub 仓库地址：</strong>
+                <div class="repo-links">
+                    <a href="https://github.com/TuringNeal/turingneal-website" target="_blank">https://github.com/TuringNeal/turingneal-website</a>
+                    <a href="https://github.com/TuringNeal/turingneal-website-1" target="_blank">https://github.com/TuringNeal/turingneal-website-1</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部 -->
+        <div class="footer-note">
+            <span>更新于 2026 年 07 月</span>
+        </div>
+
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            const root = document.documentElement;
+            const switchBtn = document.getElementById('theme-switch');
+
+            function getCurrentTheme() {
+                return root.getAttribute('data-theme') || 'light';
+            }
+
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    root.setAttribute('data-theme', 'dark');
+                    switchBtn.textContent = '暗色';
+                } else {
+                    root.removeAttribute('data-theme');
+                    switchBtn.textContent = '亮色';
+                }
+                localStorage.setItem('theme', theme);
+            }
+
+            function toggleTheme() {
+                const current = getCurrentTheme();
+                const next = (current === 'light') ? 'dark' : 'light';
+                applyTheme(next);
+            }
+
+            function init() {
+                const stored = localStorage.getItem('theme');
+                let theme = 'light';
+                if (stored === 'dark' || stored === 'light') {
+                    theme = stored;
+                }
+                applyTheme(theme);
+                switchBtn.addEventListener('click', toggleTheme);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+
+        })();
+    </script>
+
+</body>
+</html>
