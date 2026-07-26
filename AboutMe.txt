@@ -1,0 +1,13 @@
+这个网站是我中考后突然心血来潮弄出来的
+关于这个网站，我总共注册了两个域名（https://turingneal.dpdns.org【主域名，先前的“网站施工中...”页面】；https://3752113809.dpdns.org【备用域名，就是你现在看到的这个页面】）。
+不过我目前还没想好要往这个网站里面放什么东西（也许是个人博客，技术分享，或者其他）。总之，这个网站的页面在之后一段时间里不会有太大的变化，我想你也不会来这个网站看第二次。
+
+以下是各服务提供商：
+域名提供：DigitalPlat Domains
+网站托管及保护：Cloudflare
+网页和文件存放：GitHub
+网页编写：我自己
+
+GitHub仓库地址：
+https://github.com/TuringNeal/turingneal-website
+https://github.com/TuringNeal/turingneal-website-1
